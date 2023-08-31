@@ -1,43 +1,43 @@
 <script setup>
-import TutorialServices from "../services/tutorialServices";
+import CourseServices from "../services/courseServices";
 import Utils from "../config/utils.js";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const tutorials = ref([]);
-const user = Utils.getStore("user");
-const message = ref("Search, Edit or Delete Tutorials");
+const courses = ref([]);
+//const user = Utils.getStore("user");
+const message = ref("Edit or Delete Courses");
 
-const editTutorial = (tutorial) => {
-  router.push({ name: "edit", params: { id: tutorial.id } });
+const editCourse = (course) => {
+  router.push({ name: "edit", params: { id: course.id } });
 };
 
-const viewTutorial = (tutorial) => {
-  router.push({ name: "view", params: { id: tutorial.id } });
+const viewCourse = (course) => {
+  router.push({ name: "view", params: { id: course.id } });
 };
 
-const deleteTutorial = (tutorial) => {
-  TutorialServices.delete(tutorial.id)
+const deleteCourse = (course) => {
+  CourseServices.delete(course.id)
     .then(() => {
-      retrieveTutorials();
+      //retrieveTutorials();
     })
     .catch((e) => {
       message.value = e.response.data.message;
     });
 };
 
-const retrieveTutorials = () => {
-  TutorialServices.getAllForUser(user.userId)
-    .then((response) => {
-      tutorials.value = response.data;
-    })
-    .catch((e) => {
-      message.value = e.response.data.message;
-    });
-};
+//const retrieveTutorials = () => {
+//  CourseServices.getAllForUser(user.userId)
+//    .then((response) => {
+//      tutorials.value = response.data;
+//    })
+//    .catch((e) => {
+//      message.value = e.response.data.message;
+//    });
+//};
 
-retrieveTutorials();
+//retrieveTutorials();
 </script>
 
 <template>
@@ -63,17 +63,17 @@ retrieveTutorials();
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in tutorials" :key="item.title">
+            <tr v-for="(item, index) in courses" :key="item.title">
               <td>{{ item.title }}</td>
               <td>{{ item.description }}</td>
               <td>
-                <v-icon small class="mx-4" @click="editTutorial(item)">
+                <v-icon small class="mx-4" @click="editCourse(item)">
                   mdi-pencil
                 </v-icon>
-                <v-icon small class="mx-4" @click="viewTutorial(item)">
+                <v-icon small class="mx-4" @click="viewCourse(item)">
                   mdi-format-list-bulleted-type
                 </v-icon>
-                <v-icon small class="mx-4" @click="deleteTutorial(item)">
+                <v-icon small class="mx-4" @click="deleteCourse(item)">
                   mdi-trash-can
                 </v-icon>
               </td>
