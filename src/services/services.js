@@ -5,9 +5,9 @@ import Router from "../router.js";
 
 var baseurl = "";
 if (import.meta.env.DEV) {
-  baseurl = "http://localhost/tutorial/";
+  baseurl = "http://localhost/courses-t3/";
 } else {
-  baseurl = "/tutorial/";
+  baseurl = "/courses-t3/";
 }
 
 const apiClient = axios.create({
