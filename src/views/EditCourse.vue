@@ -1,11 +1,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import TutorialServices from "../services/tutorialServices";
+import CourseServices from "../services/courseServices";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const valid = ref(false);
-const tutorial = ref({});
+const course = ref({});
 const message = ref("Enter data and click save");
 
 const props = defineProps({
@@ -14,35 +14,35 @@ const props = defineProps({
   },
 });
 
-const retrieveTutorial = async () => {
+const retrieveCourse = async () => {
   try {
-    const response = await TutorialServices.get(props.id);
-    tutorial.value = response.data;
+    const response = await CourseServices.get(props.id);
+    course.value = response.data;
   } catch (e) {
     message.value = e.response.data.message;
   }
 };
 
-const updateTutorial = async () => {
+const updateCourse = async () => {
   const data = {
-    title: tutorial.value.title,
-    description: tutorial.value.description,
+    title: course.value.title,
+    description: course.value.description,
   };
   try {
-    const response = await TutorialServices.update(props.id, data);
-    tutorial.value.id = response.data.id;
-    router.push({ name: "tutorials" });
+    const response = await CourseServices.update(props.id, data);
+    course.value.id = response.data.id;
+    router.push({ name: "view", params: { id: props.id } });
   } catch (e) {
     message.value = e.response.data.message;
   }
 };
 
 const cancel = () => {
-  router.push({ name: "tutorials" });
+  router.push({ name: "view", params: { id: props.id } });
 };
 
 onMounted(() => {
-  retrieveTutorial();
+  retrieveCourse();
 });
 </script>
 
@@ -50,21 +50,21 @@ onMounted(() => {
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Tutorial Edit</v-toolbar-title>
+        <v-toolbar-title>Course Edit</v-toolbar-title>
       </v-toolbar>
       <br />
       <h4>{{ message }}</h4>
       <br />
       <v-form ref="form" v-model="valid" lazy validation>
         <v-text-field
-          v-model="tutorial.title"
-          id="title"
+          v-model="course.name"
+          id="name"
           :counter="50"
-          label="Title"
+          label="Name"
           required
         ></v-text-field>
         <v-text-field
-          v-model="tutorial.description"
+          v-model="course.description"
           id="description"
           :counter="50"
           label="Description"
@@ -75,12 +75,12 @@ onMounted(() => {
           :disabled="!valid"
           color="success"
           class="mr-4"
-          @click="updateTutorial()"
+          @click="updateCourse()"
         >
           Save
         </v-btn>
 
-        <v-btn color="error" class="mr-4" @click="cancel()"> Cancel </v-btn>
+        <v-btn color="error" class="mr-4" @click="cancel(course)"> Cancel </v-btn>
       </v-form>
     </v-container>
   </div>

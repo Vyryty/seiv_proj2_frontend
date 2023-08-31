@@ -2,34 +2,34 @@
 import ocLogo from "/oc-logo-white.png";
 import { ref, onMounted } from "vue";
 import Utils from "../config/utils";
-import AuthServices from "../services/authServices";
+//import AuthServices from "../services/authServices";
 
-const user = ref(null);
-const title = ref("Tutorials");
+//const user = ref(null);
+const title = ref("Courses");
 const initials = ref("");
 const name = ref("");
 const logoURL = ref("");
 
 const resetMenu = () => {
-  user.value = null;
-  user.value = Utils.getStore("user");
-  if (user.value) {
-    initials.value = user.value.fName[0] + user.value.lName[0];
-    name.value = user.value.fName + " " + user.value.lName;
-  }
+  //user.value = null;
+  //user.value = Utils.getStore("user");
+  //if (user.value) {
+  //  initials.value = user.value.fName[0] + user.value.lName[0];
+  //  name.value = user.value.fName + " " + user.value.lName;
+  //}
 };
 
-const logout = () => {
-  AuthServices.logoutUser(user.value)
-    .then((response) => {
-      console.log(response);
-      Utils.removeItem("user");
-      $router.push({ name: "login" });
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
-};
+//const logout = () => {
+//  AuthServices.logoutUser(user.value)
+//    .then((response) => {
+//      console.log(response);
+//      Utils.removeItem("user");
+//      $router.push({ name: "login" });
+//    })
+//    .catch((error) => {
+//      console.log("error", error);
+//    });
+//};
 
 onMounted(() => {
   logoURL.value = ocLogo;
@@ -40,7 +40,7 @@ onMounted(() => {
 <template>
   <div>
     <v-app-bar app>
-      <router-link :to="{ name: 'tutorials' }">
+      <router-link :to="{ name: 'courses' }">
         <v-img
           class="mx-2"
           :src="logoURL"
@@ -54,7 +54,7 @@ onMounted(() => {
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="user">
-        <v-btn class="mx-2" :to="{ name: 'tutorials' }"> List </v-btn>
+        <v-btn class="mx-2" :to="{ name: 'courses' }"> List </v-btn>
         <v-btn class="mx-2" :to="{ name: 'add' }"> Add Tutorial </v-btn>
       </div>
       <v-menu bottom min-width="200px" rounded offset-y v-if="user">
@@ -78,7 +78,9 @@ onMounted(() => {
                 {{ user.email }}
               </p>
               <v-divider class="my-3"></v-divider>
-              <v-btn depressed rounded text @click="logout"> Logout </v-btn>
+              <!--
+                <v-btn depressed rounded text @click="logout"> Logout </v-btn>
+              -->
             </div>
           </v-card-text>
         </v-card>
