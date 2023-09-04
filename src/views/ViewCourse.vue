@@ -67,9 +67,11 @@ const deleteCourse = () => {
 //    });
 //};
 
-onMounted(() => {
-  retrieveLessons();
-});
+
+//Commented out calling retrieveLessons
+// onMounted(() => {
+//   retrieveLessons();
+// });
 </script>
 
 <template>
@@ -104,13 +106,19 @@ onMounted(() => {
             <tr v-for="item in lessons" :key="item.title">
               <td>{{ item.title }}</td>
               <td>{{ item.description }}</td>
-              <td>
-                <v-icon small class="mx-4" @click="editLesson(item)">
+              <td>          
+                <v-icon small class="mx-4" @click="editCourse(item)">
                   mdi-pencil
                 </v-icon>
-                <v-icon small class="mx-4" @click="deleteLesson(item)">
+                <v-icon small class="mx-4" @click="deleteCourse(item)">
                   mdi-trash-can
                 </v-icon>
+                 <!-- <v-icon small class="mx-4" @click="editLesson(item)">
+                  mdi-pencil
+                </v-icon> 
+                 <v-icon small class="mx-4" @click="deleteLesson(item)">
+                  mdi-trash-can
+                </v-icon> -->                
               </td>
             </tr>
           </tbody>
