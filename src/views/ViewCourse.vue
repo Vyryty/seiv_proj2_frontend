@@ -67,6 +67,7 @@ const deleteCourse = () => {
 //    });
 //};
 
+//start function
 onMounted(() => {
   //retrieveLessons();
 });
@@ -94,23 +95,31 @@ onMounted(() => {
         </v-card-text>
         <v-table>
           <thead>
-            <tr>
+            <tr><!-- Include course information from database -->
               <th class="text-left">Title</th>
               <th class="text-left">Description</th>
-              <th class="text-left">Actions</th>
+              <th class="text-left">Hours</th>              
+              <th class="text-left">Level</th>
+              <th class="text-left">Course Number</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in lessons" :key="item.title">
               <td>{{ item.title }}</td>
               <td>{{ item.description }}</td>
-              <td>
-                <v-icon small class="mx-4" @click="editLesson(item)">
+              <td>          
+                <v-icon small class="mx-4" @click="editCourse(item)">
                   mdi-pencil
                 </v-icon>
-                <v-icon small class="mx-4" @click="deleteLesson(item)">
+                <v-icon small class="mx-4" @click="deleteCourse(item)">
                   mdi-trash-can
                 </v-icon>
+                 <!-- <v-icon small class="mx-4" @click="editLesson(item)">
+                  mdi-pencil
+                </v-icon> 
+                 <v-icon small class="mx-4" @click="deleteLesson(item)">
+                  mdi-trash-can
+                </v-icon> -->                
               </td>
             </tr>
           </tbody>
