@@ -67,11 +67,10 @@ const deleteCourse = () => {
 //    });
 //};
 
-
-//Commented out calling retrieveLessons
-// onMounted(() => {
-//   retrieveLessons();
-// });
+//start function
+onMounted(() => {
+   //retrieveLessons();
+});
 </script>
 
 <template>
@@ -96,10 +95,12 @@ const deleteCourse = () => {
         </v-card-text>
         <v-table>
           <thead>
-            <tr>
+            <tr><!-- Include course information from database -->
               <th class="text-left">Title</th>
               <th class="text-left">Description</th>
-              <th class="text-left">Actions</th>
+              <th class="text-left">Hours</th>              
+              <th class="text-left">Level</th>
+              <th class="text-left">Course Number</th>
             </tr>
           </thead>
           <tbody>
