@@ -68,7 +68,7 @@ const deleteCourse = () => {
 //};
 
 onMounted(() => {
-  retrieveLessons();
+  //retrieveLessons();
 });
 </script>
 
@@ -116,6 +116,8 @@ onMounted(() => {
           </tbody>
         </v-table>
       </v-card>
+
+      <v-btn @click="deleteCourse">Delete Course</v-btn>
     </v-container>
   </div>
 </template>
