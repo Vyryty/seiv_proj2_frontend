@@ -1,7 +1,7 @@
 <script setup>
 import CourseServices from "../services/courseServices";
 import Utils from "../config/utils.js";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -27,6 +27,10 @@ const deleteCourse = (course) => {
     });
 };
 
+const displayCourse = (course) => {
+	CourseServices.getAll;
+};
+
 //const retrieveTutorials = () => {
 //  CourseServices.getAllForUser(user.userId)
 //    .then((response) => {
@@ -38,9 +42,65 @@ const deleteCourse = (course) => {
 //};
 
 //retrieveTutorials();
+const title = ref('This is the course listings page');
+onMounted(() => {
+  //courses = CourseServices.getAll();
+  console.log(courses.value.name);
+});
 </script>
 
 <template>
+	<p><br></p>
+	<h1>{{ title }}</h1>
+	<p><br></p>
+	<div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+					<th>Hours</th>
+					<th>Level</th>
+                    <th>Course Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="course in courses" :key="course.id">
+					<router-link :to="{ name: 'courselisting_db', params: { id: course.id}}">
+						<td>{{course.name}}</td>
+						<td>{{course.dept}}</td>
+						<td>{{course.hours}}</td>
+						<td>{{course.level}}</td>
+						<td>{{course.courseNo}}</td>
+					</router-link>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<!---<script>
+import axios from 'axios'
+
+export default {
+	data() {
+		return {
+			courses: []
+		}
+	},
+	mounted() {
+		this.get();
+	},
+	method: {
+		get(){
+			axios.get('http://localhost:3013/course-t3/courses/').then(res => {
+				console.log(res)
+			});
+		}
+	}
+}
+</script> -->
+<!-- <template>
   <div>
     <v-container>
       <v-toolbar>
@@ -83,4 +143,4 @@ const deleteCourse = (course) => {
       </v-card>
     </v-container>
   </div>
-</template>
+</template> -->
