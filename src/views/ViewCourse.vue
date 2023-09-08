@@ -82,7 +82,7 @@ const deleteCourse = () => {
 onMounted(() => {
   //retrieveLessons();
   retrieveCourse();
-  console.log(course.value);
+  console.log(course.value.name);
 });
 </script>
 
