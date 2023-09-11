@@ -33,13 +33,14 @@ const props = defineProps({
 //};
 
 
-const retrieveCourse = async () => {
-  try {
-    const response = await CourseServices.get(props.id);
-    course.value = response.data;
-  } catch (e) {
-    message.value = e.response.data.message;
-  }
+const retrieveCourse = async () => {    
+  CourseServices.get(props.id)
+    .then((response) => {
+      course.value = response.data;
+    })
+    .catch((e) => {
+      message.value = e.response.data.message;
+    });
 };
 
 
@@ -82,7 +83,7 @@ const deleteCourse = () => {
 onMounted(() => {
   //retrieveLessons();
   retrieveCourse();
-  console.log(course.value.name);
+  console.log(course.value);
 });
 </script>
 
