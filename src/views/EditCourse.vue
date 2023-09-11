@@ -25,8 +25,12 @@ const retrieveCourse = async () => {
 
 const updateCourse = async () => {
   const data = {
-    title: course.value.title,
+    name: course.value.name,
     description: course.value.description,
+    hours: course.value.hours,
+    level: course.value.level,
+    dept: course.value.dept,
+    courseNo: course.value.courseNo
   };
   try {
     const response = await CourseServices.update(props.id, data);
@@ -70,7 +74,34 @@ onMounted(() => {
           label="Description"
           required
         ></v-text-field>
-
+        <v-text-field
+          v-model="course.hours"
+          id="hours"
+          :counter="50"
+          label="Hours"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.level"
+          id="level"
+          :counter="50"
+          label="Level"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.dept"
+          id="dept"
+          :counter="50"
+          label="Department"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.courseNo"
+          id="courseNo"
+          :counter="50"
+          label="Course Number"
+          required
+        ></v-text-field>
         <v-btn
           :disabled="!valid"
           color="success"
