@@ -1,6 +1,6 @@
 <script setup>
 import CourseServices from "../services/courseServices";
-import Utils from "../config/utils.js";
+//import Utils from "../config/utils.js";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -45,7 +45,7 @@ const deleteCourse = (course) => {
     <v-container>
       <v-toolbar>
         <v-toolbar-title
-          >Hello, {{ user.fName }} {{ user.lName }}!</v-toolbar-title
+          >Hello!</v-toolbar-title
         >
       </v-toolbar>
       <br /><br />

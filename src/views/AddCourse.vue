@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import CourseServices from "../services/courseServices";
-import Utils from "../config/utils.js";
 import { useRouter } from "vue-router";
 
 
@@ -22,6 +21,7 @@ const course = ref({
 const message = ref("Enter data and click save");
 
 const saveCourse = () => {
+  console.log('here 1')
   const data = {
     name: course.value.name,
     description: course.value.description,
@@ -30,13 +30,16 @@ const saveCourse = () => {
     dept: course.value.dept,
     courseNo: course.value.courseNo
   };
+  console.log('DATA', data)
   CourseServices.create(data)
     .then((response) => {
+      console.log('herre add')
       course.value.id = response.data.id;
       console.log("add " + response.data);
     })
     .catch((e) => {
       message.value = e.response.data.message;
+      console.log("MESSAGEEEE",message)
       
     });
     router.push({ name: "courses" });
@@ -44,6 +47,7 @@ const saveCourse = () => {
 };
 
 const cancel = () => {
+  console.log('CANCELLLL')
   router.push({ name: "courses" });
 };
 
