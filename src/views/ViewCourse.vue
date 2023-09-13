@@ -58,6 +58,11 @@ const deleteCourse = () => {
     });
 };
 
+const backCourse = () => {
+  router.push({ name: "courses" });
+};
+
+
 //const editLesson = (lesson) => {
 //  router.push({
 //    name: "editLesson",
@@ -148,6 +153,8 @@ onMounted(() => {
       <br> 
       <v-btn class="mx-2" color="primary" @click="editCourse">Edit</v-btn>
       <v-btn  class="mx-2" color="primary" @click="deleteCourse">Delete Course</v-btn>
+      <v-btn class="mx-2" color="primary" @click="backCourse">Back</v-btn>
+
     </v-container>
   </div>
 </template>
