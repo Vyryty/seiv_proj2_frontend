@@ -106,10 +106,10 @@ onMounted(() => {
           required
         ></v-text-field>
 
-        <v-btn :disabled="!valid" color="success" class="mr-4" @click="saveCourse(course)">Save
+        <v-btn :disabled="!valid" color="success" class="mr-4" @click="saveCourse">Save
         </v-btn>
 
-        <v-btn color="error" class="mr-4" @click="cancel(course)">Cancel</v-btn>
+        <v-btn color="error" class="mr-4" @click="cancel">Cancel</v-btn>
       </v-form>
     </v-container>
   </div>
