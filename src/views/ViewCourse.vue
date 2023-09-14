@@ -32,6 +32,18 @@ const props = defineProps({
 //    });
 //};
 
+
+const retrieveCourse = async () => {    
+  CourseServices.get(props.id)
+    .then((response) => {
+      course.value = response.data;
+    })
+    .catch((e) => {
+      message.value = e.response.data.message;
+    });
+};
+
+
 const editCourse = () => {
   router.push({ name: "edit", params: { id: props.id } });
 };
@@ -45,6 +57,11 @@ const deleteCourse = () => {
       message.value = e.response.data.message;
     });
 };
+
+const backCourse = () => {
+  router.push({ name: "courses" });
+};
+
 
 //const editLesson = (lesson) => {
 //  router.push({
@@ -67,8 +84,11 @@ const deleteCourse = () => {
 //    });
 //};
 
+
 onMounted(() => {
-  retrieveLessons();
+  //retrieveLessons();
+  retrieveCourse();
+  console.log(course.value);
 });
 </script>
 
@@ -81,8 +101,8 @@ onMounted(() => {
       <br />
       <v-card>
         <v-card-title>
-          {{ course.title }}
-          <v-btn class="mx-2" color="primary" @click="editCourse">Edit</v-btn>
+          {{ course.name }}
+          
           <!--
             <v-btn class="mx-2" color="success" @click="addLesson"
               >Add Lesson</v-btn
@@ -94,28 +114,47 @@ onMounted(() => {
         </v-card-text>
         <v-table>
           <thead>
-            <tr>
+            <tr><!-- Include course information from database -->
               <th class="text-left">Title</th>
               <th class="text-left">Description</th>
-              <th class="text-left">Actions</th>
+              <th class="text-left">Hours</th>              
+              <th class="text-left">Level</th>
+              <th class="text-left">Department</th>
+              <th class="text-left">Course Number</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in lessons" :key="item.title">
-              <td>{{ item.title }}</td>
-              <td>{{ item.description }}</td>
-              <td>
-                <v-icon small class="mx-4" @click="editLesson(item)">
+            <tr>
+            <!--<tr v-for="item in course" :key="item.title">-->
+              <td>{{ course.name }}</td>
+              <td>{{ course.description }}</td>
+              <td>{{ course.hours }}</td>
+              <td>{{ course.level }}</td>
+              <td>{{ course.dept }}</td>
+              <td>{{ course.courseNo }}</td>
+                  
+                 <!-- <v-icon small class="mx-4" @click="editLesson(item)">
                   mdi-pencil
-                </v-icon>
-                <v-icon small class="mx-4" @click="deleteLesson(item)">
+                </v-icon> 
+                 <v-icon small class="mx-4" @click="deleteLesson(item)">
                   mdi-trash-can
-                </v-icon>
-              </td>
+                </v-icon> -->                
             </tr>
+            <!--</tr>-->
           </tbody>
         </v-table>
+        <!-- <v-icon small class="mx-4" @click="editCourse(course.id)">
+                  mdi-pencil
+                </v-icon>
+                <v-icon small class="mx-4" @click="deleteCourse(course.id)">
+                  mdi-trash-can
+                </v-icon> -->
       </v-card>
+      <br> 
+      <v-btn class="mx-2" color="primary" @click="editCourse">Edit</v-btn>
+      <v-btn  class="mx-2" color="primary" @click="deleteCourse">Delete Course</v-btn>
+      <v-btn class="mx-2" color="primary" @click="backCourse">Back</v-btn>
+
     </v-container>
   </div>
 </template>
