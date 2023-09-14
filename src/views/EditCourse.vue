@@ -35,14 +35,14 @@ const updateCourse = async () => {
   try {
     const response = await CourseServices.update(props.id, data);
     course.value.id = response.data.id;
-    router.push({ name: "view", params: { id: props.id } });
+    router.go(-1);
   } catch (e) {
     message.value = e.response.data.message;
   }
 };
 
 const cancel = () => {
-  router.push({ name: "view", params: { id: props.id } });
+  router.go(-1);
 };
 
 onMounted(() => {
