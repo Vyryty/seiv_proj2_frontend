@@ -11,7 +11,7 @@ const message = ref("Enter data and click save");
 const props = defineProps({
   id: {
     required: true,
-  },
+  }
 });
 
 const retrieveCourse = async () => {
