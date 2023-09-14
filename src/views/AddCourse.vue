@@ -21,7 +21,6 @@ const course = ref({
 const message = ref("Enter data and click save");
 
 const saveCourse = () => {
-  console.log('here 1')
   const data = {
     name: course.value.name,
     description: course.value.description,
@@ -30,24 +29,18 @@ const saveCourse = () => {
     dept: course.value.dept,
     courseNo: course.value.courseNo
   };
-  console.log('DATA', data)
   CourseServices.create(data)
     .then((response) => {
-      console.log('herre add')
       course.value.id = response.data.id;
       console.log("add " + response.data);
+      router.push({ name: "courses" });
     })
     .catch((e) => {
       message.value = e.response.data.message;
-      console.log("MESSAGEEEE",message)
-      
     });
-    router.push({ name: "courses" });
-
 };
 
 const cancel = () => {
-  console.log('CANCELLLL')
   router.push({ name: "courses" });
 };
 
