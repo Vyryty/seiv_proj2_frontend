@@ -5,7 +5,7 @@ import Router from "../router.js";
 
 var baseurl = "";
 if (import.meta.env.DEV) {
-  baseurl = "http://localhost/course-t3/";
+  baseurl = "http://localhost/course-t3";
 } else {
   baseurl = "/course-t3/";
 }

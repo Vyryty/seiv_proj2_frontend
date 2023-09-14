@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import CourseServices from "../services/courseServices";
-import Utils from "../config/utils.js";
 import { useRouter } from "vue-router";
+
 
 const router = useRouter();
 const valid = ref(false);
@@ -21,24 +21,33 @@ const course = ref({
 const message = ref("Enter data and click save");
 
 const saveCourse = () => {
+  console.log('here 1')
   const data = {
     name: course.value.name,
     description: course.value.description,
-    //published: true,
-    //userId: user.userId,
+    hours: course.value.hours,
+    level: course.value.level,
+    dept: course.value.dept,
+    courseNo: course.value.courseNo
   };
+  console.log('DATA', data)
   CourseServices.create(data)
     .then((response) => {
+      console.log('herre add')
       course.value.id = response.data.id;
       console.log("add " + response.data);
-      router.push({ name: "courses" });
     })
     .catch((e) => {
       message.value = e.response.data.message;
+      console.log("MESSAGEEEE",message)
+      
     });
+    router.push({ name: "courses" });
+
 };
 
 const cancel = () => {
+  console.log('CANCELLLL')
   router.push({ name: "courses" });
 };
 
@@ -72,14 +81,36 @@ onMounted(() => {
           label="Description"
           required
         ></v-text-field>
+        <v-text-field
+          v-model="course.hours"
+          id="hours"
+          :counter="50"
+          label="Hours"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.level"
+          id="level"
+          :counter="50"
+          label="Level"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.dept"
+          id="dept"
+          :counter="50"
+          label="Department"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.courseNo"
+          id="courseNo"
+          :counter="50"
+          label="Course Number"
+          required
+        ></v-text-field>
 
-        <v-btn
-          :disabled="!valid"
-          color="success"
-          class="mr-4"
-          @click="saveCourse"
-        >
-          Save
+        <v-btn :disabled="!valid" color="success" class="mr-4" @click="saveCourse">Save
         </v-btn>
 
         <v-btn color="error" class="mr-4" @click="cancel">Cancel</v-btn>
