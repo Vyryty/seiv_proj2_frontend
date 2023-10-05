@@ -6,6 +6,7 @@ import CourseList from "./views/CourseList.vue";
 import EditCourse from "./views/EditCourse.vue";
 import AddCourse from "./views/AddCourse.vue";
 import ViewCourse from "./views/ViewCourse.vue";
+import CSVParser from "./views/CSVParser.vue";
 //import AddLesson from "./views/AddLesson.vue";
 //import EditLesson from "./views/EditLesson.vue";
 
@@ -40,6 +41,11 @@ const router = createRouter({
       component: ViewCourse,
       props: true,
     },
+    {
+      path: "/addCSV",
+      name: "addCSV",
+      component: CSVParser,
+    }
     //{
     //  path: "/addLesson/:tutorialId",
     //  name: "addLesson",

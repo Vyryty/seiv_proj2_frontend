@@ -20,6 +20,10 @@ const addCourse = (course) => {
   router.push({ name: "add", params: { id: course.id } });
 };
 
+const addByCSV = () => {
+  router.push({ name: "addCSV" });
+}
+
 const deleteCourse = (course) => {
   CourseServices.delete(course.id)
     .then(() => {
@@ -52,7 +56,8 @@ onMounted(() => {
 		</v-toolbar>
 		<p><br></p>
 		<div class="container">
-			<v-btn class="mx-2" color="primary" @click="addCourse">Add course</v-btn>
+			<v-btn class="mx-2" color="primary" @click="addCourse">Add Course</v-btn>
+      <v-btn class="mx-2" color="primary" @click="addByCSV">Add Courses From CSV</v-btn>
 			<p><br></p>
 			<v-table>
 				<thead>
